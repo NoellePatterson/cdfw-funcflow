@@ -1,0 +1,16 @@
+language: python
+python:
+  - "3.6"
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+# command to run tests
+script:
+  - python tests/all_year_test.py
+  - python tests/annual_flow_matrix_test.py
+  - python tests/fall_flush_test.py
+  - python tests/fall_winter_baseflow_test.py
+  - python tests/spring_transition_test.py
+  - python tests/summer_baseflow_test.py
+  - python tests/winter_highflow_POR_test.py
+  - python tests/winter_highflow_test.py
