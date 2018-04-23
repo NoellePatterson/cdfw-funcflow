@@ -32,6 +32,7 @@ class Gauge:
         self.winter_durations_POR = None
         self.winter_frequencys_POR = None
         self.winter_magnitudes_POR = None
+        self.rank_POR = None
         self.spring_timings = None
         self.spring_magnitudes = None
         self.spring_durations = None
@@ -67,18 +68,20 @@ class Gauge:
             self.winter_frequencys[percent] = np.array(winter_frequencys[percent], dtype=np.float)
 
     def winter_highflow_POR(self):
-        winter_timings_POR, winter_durations_POR, winter_frequencys_POR, winter_magnitudes_POR = calc_winter_highflow_POR(self.flow_matrix, self.exceedance_percent)
+        winter_timings_POR, winter_durations_POR, winter_frequencys_POR, winter_magnitudes_POR, rank_POR = calc_winter_highflow_POR(self.flow_matrix, self.exceedance_percent)
 
         self.winter_timings_POR = {}
         self.winter_durations_POR = {}
         self.winter_frequencys_POR = {}
         self.winter_magnitudes_POR = {}
+        self.rank_POR = {}
 
         for percent in self.exceedance_percent:
             self.winter_timings_POR[percent] = np.array(winter_timings_POR[percent], dtype=np.float)
             self.winter_durations_POR[percent] = np.array(winter_durations_POR[percent], dtype=np.float)
             self.winter_frequencys_POR[percent] = np.array(winter_frequencys_POR[percent], dtype=np.float)
             self.winter_magnitudes_POR[percent] = np.array(winter_magnitudes_POR[percent], dtype=np.float)
+            self.rank_POR[percent] = np.array(rank_POR[percent], dtype=np.float)
 
     def spring_transition_timing_magnitude(self):
         spring_timings, spring_magnitudes = calc_spring_transition_timing_magnitude(self.flow_matrix)
