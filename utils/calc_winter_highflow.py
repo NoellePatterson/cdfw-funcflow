@@ -12,13 +12,17 @@ def calc_winter_highflow_annual(matrix, exceedance_percent):
     duration = {}
     timing = {}
 
+    exceedance_value[2] = 26
+    exceedance_value[5] = 26
+    exceedance_value[10] = 26
+    exceedance_value[20] = 35
+    exceedance_value[50] = 35
 
-    for i, thresholds in enumerate(exceedance_percent):
-        exceedance_value[i] = exceedance_percent[i]
+    for i in exceedance_percent:
+        #exceedance_value[i] = np.nanpercentile(matrix, 100 - i)
         freq[i] = []
         duration[i] = []
         timing[i] = []
-        print(exceedance_value)
 
     for column_number, flow_column in enumerate(matrix[0]):
 
