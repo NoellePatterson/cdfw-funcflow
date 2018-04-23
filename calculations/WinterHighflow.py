@@ -7,7 +7,7 @@ from classes.GaugePlotter import GaugePlotter
 
 
 class WinterHighflow(Abstract):
-    exceedance_percent = [2, 5, 10, 26, 50]
+    exceedance_percent = [2, 5, 10, 20, 50]
 
     def __init__(self, start_date, directory_name, end_with, class_number, gauge_numbers, plot):
         Abstract.__init__(self, start_date, directory_name, end_with, class_number, gauge_numbers)

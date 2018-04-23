@@ -13,7 +13,7 @@ from params import general_params
 
 
 class Gauge:
-    exceedance_percent = [2, 5, 10, 26, 50]
+    exceedance_percent = [2, 5, 10, 20, 50]
 
     def __init__(self, class_number, gauge_number, year_ranges, flow_matrix, julian_dates, start_date, start_year, end_year):
         self.class_number = class_number
