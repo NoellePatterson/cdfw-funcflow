@@ -123,6 +123,5 @@ def calc_winter_highflow_POR(matrix, exceedance_percent):
                         """Continue of a object"""
                         current_flow_object[percent].add_flow(flow_row)
                         current_flow_object[percent].duration = current_flow_object[percent].duration + 1
-    print(rank)
 
     return timing, duration, freq, magnitude, rank
