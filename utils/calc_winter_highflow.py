@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from scipy import stats
 from utils.helpers import median_of_time
 from classes.FlowExceedance import FlowExceedance
@@ -16,7 +17,7 @@ def calc_winter_highflow_annual(matrix, exceedance_percent):
     exceedance_value[2] = 26
     exceedance_value[5] = 26
     exceedance_value[10] = 26
-    exceedance_value[20] = 35
+    exceedance_value[20] = 26
     exceedance_value[50] = 35
 
     for i in exceedance_percent:
@@ -83,11 +84,12 @@ def calc_winter_highflow_POR(matrix, exceedance_percent):
     average_annual_flow = np.nanmedian(matrix)
     rank = {}
 
-    exceedance_value[2] = 1.9
-    exceedance_value[5] = 3.6
-    exceedance_value[10] = 26
-    exceedance_value[20] = 35
-    exceedance_value[50] = 35
+    exceedance_value[2] = 57.7
+    exceedance_value[5] = 57.7
+    exceedance_value[10] = 12.7
+    exceedance_value[20] = 19.7
+    exceedance_value[50] = 18.1
+
 
     for i in exceedance_percent:
         #exceedance_value[i] = np.nanpercentile(matrix, 100 - i)
@@ -97,8 +99,9 @@ def calc_winter_highflow_POR(matrix, exceedance_percent):
         duration[i] = []
         timing[i] = []
         magnitude[i] = []
-        matrix_nan = matrix[~np.isnan(matrix)] # prepare a matrix without nan values for the percentile of score function
-        rank[i] = stats.percentileofscore(matrix_nan, exceedance_value[i], kind='mean')
+        matrix_winter = matrix[60:183,:] # pull out flows from Dec1-Apr30 for every year
+        matrix_winter_nan = matrix_winter[~np.isnan(matrix_winter)] # remove all nan values for the percentile of score function
+        rank[i] = stats.percentileofscore(matrix_winter_nan, exceedance_value[i], kind='mean')
 
         if i == 50:
             matrix_salmon = matrix_nan[62:213]
