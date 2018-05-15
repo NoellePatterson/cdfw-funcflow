@@ -90,6 +90,7 @@ def calc_winter_highflow_POR(matrix, exceedance_percent):
     exceedance_value[20] = 19.7
     exceedance_value[50] = 18.1
 
+
     for i in exceedance_percent:
         #exceedance_value[i] = np.nanpercentile(matrix, 100 - i)
         exceedance_object[i] = []
@@ -101,6 +102,11 @@ def calc_winter_highflow_POR(matrix, exceedance_percent):
         matrix_winter = matrix[60:183,:] # pull out flows from Dec1-Apr30 for every year
         matrix_winter_nan = matrix_winter[~np.isnan(matrix_winter)] # remove all nan values for the percentile of score function
         rank[i] = stats.percentileofscore(matrix_winter_nan, exceedance_value[i], kind='mean')
+
+        if i == 50:
+            matrix_salmon = matrix_nan[62:213]
+            print(len(matrix_salmon))
+            rank[i] = stats.percentileofscore(matrix_salmon, exceedance_value[i], kind='mean')
 
     for column_number, flow_column in enumerate(matrix[0]):
         for row_number, flow_row in enumerate(matrix[:, column_number]):
@@ -126,5 +132,4 @@ def calc_winter_highflow_POR(matrix, exceedance_percent):
                         current_flow_object[percent].add_flow(flow_row)
                         current_flow_object[percent].duration = current_flow_object[percent].duration + 1
     print(rank)
-
     return timing, duration, freq, magnitude, rank
